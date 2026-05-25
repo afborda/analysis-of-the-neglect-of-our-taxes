@@ -1,7 +1,81 @@
-# 🏛️ Análise da Negligência nos Nossos Impostos
+# Análise da Negligência nos Nossos Impostos
 ### *Transparência municipal para todos os brasileiros*
 
-> **Projeto de dados abertos** criado por [Miguel](#) e [você](#) para transformar dados públicos complexos em informação acessível sobre como as prefeituras do Brasil gastam o dinheiro dos cidadãos.
+> **Projeto de dados abertos** criado por Abner Fonseca e Miguel para transformar dados públicos complexos em informação acessível sobre como as prefeituras do Brasil gastam o dinheiro dos cidadãos.
+
+![Status](https://img.shields.io/badge/status-Fase%201%20em%20andamento-blue)
+![Municípios](https://img.shields.io/badge/piloto-Acre%2022%20municípios-green)
+![Licença](https://img.shields.io/badge/licença-MIT-lightgrey)
+
+---
+
+## Status Atual
+
+| Fase | Escopo | Status |
+|------|--------|--------|
+| **Fase 1** | Piloto — Acre (22 municípios) | 🟡 Em andamento |
+| Fase 2 | Região Norte (450 municípios) | ⏳ Planejada |
+| Fase 3 | Brasil completo (5.570 municípios) | ⏳ Planejada |
+| Fase 4 | Dashboard público + API + IA | ⏳ Planejada |
+
+---
+
+## Começo Rápido
+
+### Pré-requisitos
+
+- Python 3.12+
+- Conta Google Cloud gratuita ([criar aqui](https://console.cloud.google.com)) com projeto `analise-municipios-br`
+- Token gratuito da [API do Portal da Transparência](https://api.portaldatransparencia.gov.br/swagger-ui)
+- Docker (para os scrapers Playwright)
+
+### Instalação
+
+```bash
+git clone https://github.com/seu-usuario/analysis-of-the-neglect-of-our-taxes.git
+cd analysis-of-the-neglect-of-our-taxes
+
+# Instalar dependências Python
+pip install -r requirements.txt
+playwright install chromium
+
+# Configurar variáveis de ambiente
+cp .env.example .env
+# Editar .env com: GCP_PROJECT_ID, GOOGLE_APPLICATION_CREDENTIALS, TRANSPARENCIA_API_TOKEN
+```
+
+### Rodar os notebooks
+
+```bash
+# Abrir JupyterLab
+jupyter lab
+
+# Ou executar todos automaticamente
+jupyter nbconvert --to notebook --execute notebooks/fase1_acre/*.ipynb
+```
+
+### Rodar os scrapers no Docker
+
+```bash
+docker build -t playwright-scraper -f docker/playwright/Dockerfile .
+
+# Coletar ficha limpa dos prefeitos do Acre
+docker run -v $(pwd)/data:/app/data playwright-scraper scrapers/tse_ficha_limpa.py AC
+```
+
+---
+
+## Documentação
+
+| Documento | Descrição |
+|-----------|-----------|
+| [Arquitetura Geral](docs/arquitetura-geral.md) | Fluxo de dados, ERD, stack por fase |
+| [Roadmap de Fases](docs/roadmap-fases.md) | Linha do tempo e critérios de conclusão |
+| [IVM — Metodologia](docs/ivm-metodologia.md) | Como o Índice de Viabilidade Municipal é calculado |
+| [Fluxo de Coleta](docs/fluxo-coleta.md) | BD+ vs Playwright vs API — quando usar cada um |
+| [Guia dos Notebooks](docs/notebooks-guia.md) | Progressão de aprendizado dos 7 notebooks |
+| [Fontes de Dados](docs/fontes-de-dados/fontes-pesquisadas.md) | 15 portais públicos mapeados |
+| [Plano Fase 1](docs/superpowers/plans/2026-05-25-fase1-acre.md) | Plano de implementação passo a passo |
 
 ---
 
@@ -13,7 +87,9 @@ Os dados **existem** — estão no Portal da Transparência, no IBGE, no TSE, no
 
 **Nós vamos mudar isso.**
 
-Esse projeto coleta, limpa, cruza e publica esses dados de forma clara, comparável e acessível — para jornalistas, pesquisadores, estudantes e qualquer cidadão que queira saber: *"O que está acontecendo na minha cidade?"*
+Esse projeto coleta, limpa, cruza e publica esses dados de forma clara, comparável e acessível. É também um projeto de aprendizado: estamos aprendendo análise de dados, Spark, Playwright, backend e frontend fazendo algo que importa.
+
+
 
 ---
 
@@ -164,7 +240,7 @@ Esse projeto é **aberto e colaborativo**. Você pode ajudar:
 
 | Nome | Papel |
 |------|-------|
-| **[Seu nome]** | Fundador, Engenharia de Dados |
+| **Abner Fonseca** | Co-fundador, Engenharia de Dados |
 | **Miguel** | Co-fundador, Análise e Visualização |
 
 ---
