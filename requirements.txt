@@ -1,0 +1,21 @@
+# dados
+basedosdados==2.0.3
+pandas==2.2.2
+numpy==1.26.4
+
+# visualização
+plotly==5.22.0
+nbformat==5.10.4
+
+# coleta
+requests==2.32.3
+playwright==1.51.0
+python-dotenv==1.0.1
+
+# análise
+scikit-learn==1.5.2
+
+# jupyter
+jupyter==1.1.1
+jupyterlab==4.2.0
+ipykernel==6.29.4

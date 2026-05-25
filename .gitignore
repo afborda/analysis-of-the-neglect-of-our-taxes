@@ -1,0 +1,25 @@
+# dados (podem ser grandes ou sensíveis)
+data/raw/
+data/processed/
+*.parquet
+*.csv
+
+# credenciais Google Cloud
+*.json
+!package.json
+.env
+
+# jupyter checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+uv.lock
+
+# superpowers
+.superpowers/
